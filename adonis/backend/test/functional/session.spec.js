@@ -22,10 +22,7 @@ test('it should return JWT token when session created', async ({ assert, client 
 
       const response = await client
       .post('/sessions')
-      .send({
-        email: 'fkinvest@gmail.com',
-        password: '123456'
-    }).end()
+      .send(sessionPayload).end()
 
     response.assertStatus(200);
 
