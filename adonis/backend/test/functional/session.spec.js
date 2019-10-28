@@ -10,13 +10,17 @@ const Factory = use('Factory');
 trait('Test/ApiClient')
 
 test('it should return JWT token when session created', async ({ assert, client }) => {
-    const user = await User.create({
-        username: 'Rodrigo Ferraro',
+    
+    const sessionPayload = {
         email: 'fkinvest@gmail.com',
         password: '123456'
-    });
+    };
 
-    const response = await client
+    const user = await Factory
+      .model('App/Models/User')
+      .create(sessionPayload);
+
+      const response = await client
       .post('/sessions')
       .send({
         email: 'fkinvest@gmail.com',
