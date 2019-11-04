@@ -18,9 +18,7 @@ await Factory.model('App/Models/User').create(sessionPayload)
     .send(sessionPayload)
     .end();
 
-    console.log(response)
-  //response.assertStatus(200);
+  response.assertStatus(200);
 
-  assert.exists(true);
-  //assert.exists(response.body.token);
+  assert.exists(response.body.token);
 });
