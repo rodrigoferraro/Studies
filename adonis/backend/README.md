@@ -1,4 +1,5 @@
 # TODO
--Style guides
 -Validações
--Configurar debugger
+-Criar Projeto no Insomnia
+-OK Style guides
+-OK Configurar debugger
