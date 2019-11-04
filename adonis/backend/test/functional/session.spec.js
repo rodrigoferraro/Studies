@@ -12,7 +12,7 @@ async ({ assert, client }) => {
     email: 'fkinvest@gmail.com',
     password: '123456',
   };
-
+await Factory.model('App/Models/User').create(sessionPayload)
   const response = await client
     .post('/sessions')
     .send(sessionPayload)
