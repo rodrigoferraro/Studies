@@ -1,28 +1,44 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
-    "airbnb-base",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
+    "react-app",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
   ],
   "globals": {
-    "use": "readonly",
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
+  "plugins": ["react", "import", "jsx-ally"],
   "rules": {
-    "prettier/prettier": "error",
-    "class-methods-use-this": "off",
-    "consistent-return": "off",
-    "no-param-reassign": "off"
+    "react/jsx-filename-extension":[
+      "error",
+      {
+        "extensions":[".tsx"]
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }

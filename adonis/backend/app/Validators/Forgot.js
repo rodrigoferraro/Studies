@@ -2,17 +2,17 @@
 const Antl = use('Antl');
 
 class Forgot {
-  get validateAll(){
+  get validateAll() {
     return true;
   }
 
-  get rules () {
+  get rules() {
     return {
       email: 'email|required',
     }
   }
 
-  get messages(){
+  get messages() {
     return Antl.list('validation');
   }
 }

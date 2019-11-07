@@ -2,16 +2,16 @@
 const Antl = use('Antl');
 
 class Reset {
-  get validateAll(){
+  get validateAll() {
     return true;
   }
-  get rules () {
+  get rules() {
     return {
       token: 'required',
       password: 'required|confirmed',
     }
   }
-  get messages(){
+  get messages() {
     return Antl.list('validation');
   }
 
