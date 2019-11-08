@@ -7,6 +7,7 @@ class Workshop {
   get validateAll() {
     return true;
   }
+
   get rules() {
     return {
       title: [rule('required')],
@@ -15,6 +16,7 @@ class Workshop {
       user_id: [rule('required'), rule('exists', ['users', 'id'])],
     };
   }
+  
   get messages() {
     return Antl.list('validation');
   }
