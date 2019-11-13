@@ -20,6 +20,7 @@ Route.post('/reset', 'ResetPasswordController.store').validator('Reset');
 
 
 Route.group(()=> {
+    Route.put('/profile', 'ProfileController.update');
     Route.get('/workshops', 'WorkshopController.index');
     Route.get('/workshops/:id', 'WorkshopController.show');
     Route.post('/workshops', 'WorkshopController.store').validator('Workshop');

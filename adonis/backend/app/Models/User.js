@@ -5,6 +5,9 @@ const Model = use('Model');
 const Hash = use('Hash');
 
 class User extends Model {
+  static get computer(){
+    return ['avatar_url']
+  }
   static boot() {
     super.boot();
 
@@ -18,9 +21,15 @@ class User extends Model {
   tokens() {
     return this.hasMany('App/Models/Token');
   }
-  wokshops() {
+  workshops() {
     return this.hasMany('App/Models/Workshop');
   }
+
+  getAvatarUrl({ avatar }){
+    return '';//`${Env.get('APP_URL')}/files/${avatar || 'placeholder.png'}`;
+  }
+
+
 }
 
 module.exports = User;

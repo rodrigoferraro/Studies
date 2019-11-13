@@ -34,15 +34,18 @@ async({
   client
 })=>{
   const user = await Factory.model('App/Models/User').create()
-  const workshop = await Factory.model('App/Models/Workshop').make()
+  const workshop = await Factory.model('App/Models/Workshop').make({
+    section: 2,
+  })
 
   await user.workshops().save(workshop)
 
   const response = await client
     .get('/workshops')
+    .query({section: 2})
     .loginVia(user,'jwt')
     .end()
-  
+
   response.assertStatus(200)
 
   assert.equal(response.body[0].title, workshop.title)
@@ -50,13 +53,13 @@ async({
 
 })
 
-test('it should be able to show a queried workshop', 
+test('it should be able to show a single workshop', 
 async({
   assert, 
   client
 })=>{
   const user = await Factory.model('App/Models/User').create()
-  const workshop = await Factory.model('App/Models/Workshop').make()
+  const workshop = await Factory.model('App/Models/Workshop').create()
 
   await user.workshops().save(workshop)
 
