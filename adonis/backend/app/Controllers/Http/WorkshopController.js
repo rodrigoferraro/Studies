@@ -17,6 +17,7 @@ class WorkshopController {
 
     return workshops;
   }
+
   async show ({ params }) {
 
     const workshop = await Workshop.find(params.id)
@@ -35,6 +36,7 @@ class WorkshopController {
 
     return response.status(201).json(workshop)
   }
+  
   async update({ request, params }){
     const data = request.only([
       'title',
