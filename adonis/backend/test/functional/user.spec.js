@@ -6,6 +6,7 @@ const {
 /** @type {typeof import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
 const Helpers = use('Helpers');
+const Hash = use('Hash');
 
 trait('DatabaseTransactions');
 trait('Test/ApiClient');
@@ -18,7 +19,8 @@ test('it should be able to update profile data',
   }) => {
 
     const user = await Factory.model('App/Models/User').create({
-      username:'Rodrigo'
+      username:'Rodrigo', 
+      password: '123456'
     })
 
     const response = await client
@@ -26,6 +28,8 @@ test('it should be able to update profile data',
       .loginVia(user, 'jwt')
       .field('username', 'João')
       .field('job_title', 'Analista')
+      .field('password', '321321')
+      .field('password_confirmation', '321321')
       .attach('avatar', Helpers.tmpPath('test/avatar.png'))
       .end();
 
@@ -34,4 +38,9 @@ test('it should be able to update profile data',
     assert.equal(response.body.username, 'João');
     assert.equal(response.body.job_title, 'Analista');
     assert.exists(response.body.avatar);
+
+    await user.reload()
+
+    assert.isTrue(await Hash.verify('321321', user.password))
+
   });

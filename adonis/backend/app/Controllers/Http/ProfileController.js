@@ -25,6 +25,11 @@ class ProfileController {
 
     user.merge(data);
 
+    const password = request.input('password')
+    if (password){
+      user.password = password
+    }
+
     await user.save()
 
     return user

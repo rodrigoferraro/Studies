@@ -11,6 +11,8 @@ class Profile {
 
   get rules() {
     return {
+      username: 'required',
+      password: 'confirmed',
       avatar: 'file|file_ext:png|file_size:2mb|file_types:image',
     }
   }
