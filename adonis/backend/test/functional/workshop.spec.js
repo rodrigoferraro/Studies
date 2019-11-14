@@ -5,7 +5,7 @@ const {
 
 /** @type {typeof import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory');
-
+const Workshop = use('App/Models/Workshop')
 trait('DatabaseTransactions');
 trait('Test/ApiClient');
 trait('Auth/Client');
@@ -114,4 +114,26 @@ test('it should be able to update a workshop',
 
     assert.equal(res.title, 'New Title')
 
+  })
+
+  test('it should be able to delete a workshop',
+  async ({
+    assert,
+    client
+  }) => {
+    const user = await Factory.model('App/Models/User').create()
+    const workshop = await Factory.model('App/Models/Workshop').create()
+
+    await user.workshops().save(workshop)
+
+    const response = await client
+      .delete(`/workshops/${workshop.id}`)
+      .loginVia(user, 'jwt')
+      .end()
+
+    response.assertStatus(204)
+    
+    const w = await Workshop.find(workshop.id)
+    
+    assert.isNull(w)
   })

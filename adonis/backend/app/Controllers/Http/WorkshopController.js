@@ -4,7 +4,9 @@
 const Workshop = use('App/Models/Workshop')
 
 class WorkshopController {
-  async index({ request }){
+  async index({
+    request
+  }) {
     const section = request.input('section', 3);
 
     const workshops = await Workshop
@@ -18,7 +20,9 @@ class WorkshopController {
     return workshops;
   }
 
-  async show ({ params }) {
+  async show({
+    params
+  }) {
 
     const workshop = await Workshop.find(params.id)
     await workshop.load('user', builder => {
@@ -28,7 +32,10 @@ class WorkshopController {
     return workshop
   }
 
-  async store ({ request, response }) {
+  async store({
+    request,
+    response
+  }) {
 
     const data = request.only(['title', 'description', 'user_id', 'section']);
 
@@ -36,8 +43,11 @@ class WorkshopController {
 
     return response.status(201).json(workshop)
   }
-  
-  async update({ request, params }){
+
+  async update({
+    request,
+    params
+  }) {
     const data = request.only([
       'title',
       'description',
@@ -48,6 +58,13 @@ class WorkshopController {
     workshop.merge(data);
     await workshop.save();
     return workshop;
+  }
+
+  async destroy({
+    params
+  }) {
+    const workshop = await Workshop.find(params.id);
+    await workshop.delete();
   }
 }
 
