@@ -1,6 +1,4 @@
-const {
-  rule
-} = use('Validator')
+const { rule } = use('Validator');
 const Antl = use('Antl');
 
 class Workshop {
@@ -16,9 +14,9 @@ class Workshop {
       user_id: [rule('exists', ['users', 'id'])],
     };
   }
-  
+
   get messages() {
     return Antl.list('validation');
   }
 }
-module.exports = Workshop
+module.exports = Workshop;
